@@ -2,6 +2,7 @@
 @import 'shared/font.css';
 @import 'shared/header.css';
 @import 'shared/buttons.css';
+@import 'shared/form.css';
 
 :root {
 	font-family: 'Gotham Rounded';
@@ -14,12 +15,6 @@
 *::after {
 	box-sizing: border-box;
 }
-
-/* button,
-a {
-	text-decoration: none;
-	cursor: pointer;
-} */
 
 body {
 	background: linear-gradient(
