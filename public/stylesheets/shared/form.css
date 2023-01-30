@@ -80,3 +80,7 @@
 	color: var(--color-text-light);
 	font-size: inherit;
 }
+
+.filepond--credits {
+	display: none;
+}
