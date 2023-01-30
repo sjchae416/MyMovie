@@ -32,6 +32,7 @@ router.post('/', async (req, res) => {
 	const author = new Author({
 		name: req.body.name,
 	});
+
 	try {
 		const newAuthor = await author.save();
 
@@ -44,6 +45,7 @@ router.post('/', async (req, res) => {
 	}
 });
 
+// ANCHOR cRud - show author route
 router.get('/:id', async (req, res) => {
 	try {
 		const author = await Author.findById(req.params.id);
@@ -58,6 +60,7 @@ router.get('/:id', async (req, res) => {
 	}
 });
 
+// ANCHOR cRud - edit user route
 router.get('/:id/edit', async (req, res) => {
 	try {
 		const author = await Author.findById(req.params.id);
@@ -68,12 +71,14 @@ router.get('/:id/edit', async (req, res) => {
 	}
 });
 
+// ANCHOR crUd - update author route
 router.put('/:id', async (req, res) => {
 	let author;
 
 	try {
 		author = await Author.findById(req.params.id);
 		author.name = req.body.name;
+
 		await author.save();
 		res.redirect(`/authors/${author.id}`);
 	} catch {
@@ -88,11 +93,13 @@ router.put('/:id', async (req, res) => {
 	}
 });
 
+// ANCHOR cruD - delete author page
 router.delete('/:id', async (req, res) => {
 	let author;
 
 	try {
 		author = await Author.findById(req.params.id);
+
 		await author.remove();
 		res.redirect('/authors');
 	} catch {

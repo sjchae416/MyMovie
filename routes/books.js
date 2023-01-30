@@ -101,7 +101,7 @@ router.put('/:id', async (req, res) => {
 	}
 });
 
-// ANCHOR cruD - delete book page
+// ANCHOR cruD - delete book route
 router.delete('/:id', async (req, res) => {
 	let book;
 
