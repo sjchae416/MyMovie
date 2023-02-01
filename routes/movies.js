@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 		title: req.body.title,
 		actor: req.body.actor,
 		publishDate: new Date(req.body.publishDate),
-		pageCount: req.body.pageCount,
+		rating: req.body.rating,
 		description: req.body.description,
 	});
 
@@ -83,7 +83,7 @@ router.put('/:id', async (req, res) => {
 		movie.title = req.body.title;
 		movie.actor = req.body.actor;
 		movie.publishDate = new Date(req.body.publishDate);
-		movie.pageCount = req.body.pageCount;
+		movie.rating = req.body.rating;
 		movie.description = req.body.description;
 
 		if (req.body.cover != null && req.body.cover !== '') {

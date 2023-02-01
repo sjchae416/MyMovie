@@ -11,7 +11,7 @@ const movieSchema = new mongoose.Schema({
 		type: Date,
 		required: true,
 	},
-	pageCount: {
+	rating: {
 		type: Number,
 		require: true,
 	},
