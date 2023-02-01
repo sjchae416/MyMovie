@@ -1,0 +1,50 @@
+<div class="form-row">
+	<div class="form-item">
+		<label>Title</label>
+		<input type="text" name="title" value="<%= movie.title %>" />
+	</div>
+
+	<div class="form-item">
+		<label>Actor</label>
+		<select name="actor">
+			<% actors.forEach(actor => { %> <% if (actor.id === movie.actor) { %>
+			<option label="<%= actor.name %>" value="<%= actor.id %>"></option>
+			<% } else { %>
+			<option label="<%= actor.name %>" value="<%= actor.id %>"></option>
+			<% } %> <% }); %>
+		</select>
+	</div>
+</div>
+
+<div class="form-row">
+	<div class="form-item">
+		<label>Publish Date</label>
+		<input
+			type="date"
+			name="publishDate"
+			value="<%= movie.publishDate == null ? '' : movie.publishDate.toISOString().split('T')[0] %>"
+		/>
+	</div>
+
+	<div class="form-item">
+		<label>Page Count</label>
+		<input
+			type="number"
+			name="pageCount"
+			min="1"
+			value="<%= movie.pageCount %>"
+		/>
+	</div>
+</div>
+
+<div class="form-row">
+	<div class="form-item form-item-no-grow">
+		<label>Cover</label>
+		<input type="file" name="cover" class="movie-cover filepond" />
+	</div>
+
+	<div class="form-item">
+		<label>Description</label>
+		<textarea name="description"><%= movie.description %></textarea>
+	</div>
+</div>

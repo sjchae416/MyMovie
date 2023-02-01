@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const Book = require('../models/book');
+const Movie = require('../models/movie');
 
 router.get('/', async (req, res) => {
-	let books = [];
+	let movies = [];
 
 	try {
-		books = await Book.find().sort({ createdAt: 'desc' }).limit(10).exec();
+		movies = await Movie.find().sort({ createdAt: 'desc' }).limit(10).exec();
 	} catch {
-		books = [];
+		movies = [];
 	}
-	res.render('index', { books: books });
+	res.render('index', { movies: movies });
 });
 
 module.exports = router;

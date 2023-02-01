@@ -1,9 +1,9 @@
-.author-row {
+.actor-row {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 1rem;
 }
 
-.author-name {
+.actor-name {
 	font-size: 1.5rem;
 }

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const coverImageBasePath = 'uploads/bookCovers';
-const bookSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
 	title: {
 		type: String,
 		required: true,
@@ -29,14 +28,14 @@ const bookSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	author: {
+	actor: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,
-		ref: 'Author',
+		ref: 'Actor',
 	},
 });
 
-bookSchema.virtual('coverImagePath').get(function () {
+movieSchema.virtual('coverImagePath').get(function () {
 	if (this.coverImage != null && this.coverImageType != null) {
 		return `data:${
 			this.coverImageType
@@ -44,4 +43,4 @@ bookSchema.virtual('coverImagePath').get(function () {
 	}
 });
 
-module.exports = mongoose.model('Book', bookSchema);
+module.exports = mongoose.model('Movie', movieSchema);
