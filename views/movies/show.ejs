@@ -3,6 +3,7 @@
 <div class="movie-details">
 	<div>
 		<img class="movie-cover" src="<%= movie.coverImagePath %>" />
+    
 		<div class="movie-details-btn-grid">
 			<a class="btn btn-primary" href="/movies/<%= movie.id %>/edit">Edit</a>
 			<%- include('../partials/deleteForm', { url : `/movies/${movie.id}` }) %>
@@ -17,8 +18,8 @@
 	<div class="movie-details-grid">
 		<div class="movie-details-label">Actor:</div>
 		<div><%= movie.actor.name %></div>
-		<div class="movie-details-label">Publish Date:</div>
-		<div><%= movie.publishDate.toDateString() %></div>
+		<div class="movie-details-label">Release Date:</div>
+		<div><%= movie.releaseDate.toDateString() %></div>
 		<div class="movie-details-label">Rating:</div>
 		<div><%= movie.rating %></div>
 		<div class="movie-details-label">Description:</div>

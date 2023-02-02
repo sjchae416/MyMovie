@@ -7,8 +7,15 @@
 	<div class="form-item">
 		<label>Actor</label>
 		<select name="actor">
-			<% actors.forEach(actor => { %> <% if (actor.id === movie.actor) { %>
-			<option label="<%= actor.name %>" value="<%= actor.id %>"></option>
+			<% actors.forEach(actor => { %>
+			<!-- FIXME (actor.id === movie.actor) always false -->
+			<% if (actor.id === movie.actor?.toString()) { %>
+			<option
+				selected
+				label="<%= actor.name %>"
+				value="<%= actor.id %>"
+			></option>
+			<!-- FIXED allow true by using optional chaining: movie.actor?.toString() -->
 			<% } else { %>
 			<option label="<%= actor.name %>" value="<%= actor.id %>"></option>
 			<% } %> <% }); %>
@@ -18,11 +25,11 @@
 
 <div class="form-row">
 	<div class="form-item">
-		<label>Publish Date</label>
+		<label>Release Date</label>
 		<input
 			type="date"
-			name="publishDate"
-			value="<%= movie.publishDate == null ? '' : movie.publishDate.toISOString().split('T')[0] %>"
+			name="releaseDate"
+			value="<%= movie.releaseDate == null ? '' : movie.releaseDate.toISOString().split('T')[0] %>"
 		/>
 	</div>
 

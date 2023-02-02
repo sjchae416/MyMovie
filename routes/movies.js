@@ -11,12 +11,19 @@ router.get('/', async (req, res) => {
 	if (req.query.title != null && req.query.title != '') {
 		query = query.regex('title', new RegExp(req.query.title, 'i'));
 	}
-	if (req.query.publishedBefore != null && req.query.publishedBefore != '') {
-		query = query.lte('publishedDate', req.query.publishedBefore);
+	// FIXME doesn't allow filter only one (either releasedBefore or releasedAfter)
+	if (req.query.releasedBefore != null && req.query.releasedBefore != '') {
+		// REVIEW req.query.releasedBefore != '' necessary?
+		// if (req.query.releasedBefore != null) {
+		query = query.lte('releaseDate', req.query.releasedBefore);
 	}
-	if (req.query.publishedAfter != null && req.query.publishedAfter != '') {
-		query = query.gte('publishedDate', req.query.publishedAfter);
+	if (req.query.releasedAfter != null && req.query.releasedAfter != '') {
+		// REVIEW req.query.releasedAfter != '' necessary?
+		// if (req.query.releasedAfter != null) {
+		query = query.gte('releaseDate', req.query.releasedAfter);
 	}
+	// FIXME
+
 	try {
 		const movies = await query.exec();
 
@@ -39,7 +46,7 @@ router.post('/', async (req, res) => {
 	const movie = new Movie({
 		title: req.body.title,
 		actor: req.body.actor,
-		publishDate: new Date(req.body.publishDate),
+		releaseDate: new Date(req.body.releaseDate),
 		rating: req.body.rating,
 		description: req.body.description,
 	});
@@ -48,6 +55,7 @@ router.post('/', async (req, res) => {
 
 	try {
 		const newMovie = await movie.save();
+
 		res.redirect(`movies/${newMovie.id}`);
 	} catch {
 		renderNewPage(res, movie, true);
@@ -58,16 +66,18 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
 	try {
 		const movie = await Movie.findById(req.params.id).populate('actor').exec();
+
 		res.render('movies/show', { movie: movie });
 	} catch {
 		res.render('/');
 	}
 });
 
-// ANCHOR crUd - edut movie route
+// ANCHOR crUd - edit movie route
 router.get('/:id/edit', async (req, res) => {
 	try {
 		const movie = await Movie.findById(req.params.id);
+
 		renderEditPage(res, movie);
 	} catch {
 		res.redirect('/movies');
@@ -82,7 +92,7 @@ router.put('/:id', async (req, res) => {
 		movie = await Movie.findById(req.params.id);
 		movie.title = req.body.title;
 		movie.actor = req.body.actor;
-		movie.publishDate = new Date(req.body.publishDate);
+		movie.releaseDate = new Date(req.body.releaseDate);
 		movie.rating = req.body.rating;
 		movie.description = req.body.description;
 
@@ -93,6 +103,7 @@ router.put('/:id', async (req, res) => {
 		res.redirect(`/movies/${movie.id}`);
 	} catch (err) {
 		console.log(err);
+
 		if (movie != null) {
 			renderEditPage(res, movie, true);
 		} else {
@@ -107,6 +118,7 @@ router.delete('/:id', async (req, res) => {
 
 	try {
 		movie = await Movie.findById(req.params.id);
+
 		await movie.remove();
 		res.redirect('/movies');
 	} catch {
@@ -144,6 +156,7 @@ async function renderFormPage(res, movie, form, hasError = false) {
 				params.errorMessage = 'Error Creating Movie';
 			}
 		}
+
 		res.render(`movies/${form}`, params);
 	} catch {
 		res.render('/movies');

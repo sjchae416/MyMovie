@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 
 // ANCHOR cRud - new actor route
 router.get('/new', (req, res) => {
-	res.render('actors/new', { actor: new Actor() });
+	res.render('actors/new');
 });
 
 // ANCHOR Crud - create actor route
