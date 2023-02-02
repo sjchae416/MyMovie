@@ -11,12 +11,14 @@ router.get('/', async (req, res) => {
 	if (req.query.title != null && req.query.title != '') {
 		query = query.regex('title', new RegExp(req.query.title, 'i'));
 	}
-	// FIXME doesn't allow filter only one (either releasedBefore or releasedAfter)
+
+	// FIXME unable to filter only one (either releasedBefore or releasedAfter)
 	if (req.query.releasedBefore != null && req.query.releasedBefore != '') {
 		// REVIEW req.query.releasedBefore != '' necessary?
 		// if (req.query.releasedBefore != null) {
 		query = query.lte('releaseDate', req.query.releasedBefore);
 	}
+
 	if (req.query.releasedAfter != null && req.query.releasedAfter != '') {
 		// REVIEW req.query.releasedAfter != '' necessary?
 		// if (req.query.releasedAfter != null) {
@@ -99,6 +101,7 @@ router.put('/:id', async (req, res) => {
 		if (req.body.cover != null && req.body.cover !== '') {
 			saveCover(movie, req.body.cover);
 		}
+
 		await movie.save();
 		res.redirect(`/movies/${movie.id}`);
 	} catch (err) {
@@ -164,7 +167,9 @@ async function renderFormPage(res, movie, form, hasError = false) {
 }
 
 function saveCover(movie, coverEncoded) {
-	if (coverEncoded == null) return;
+	// FIXME open server -> Add Movie -> Create w/empty form => page crash
+	if (coverEncoded == null || coverEncoded.length < 1) return;
+	// FIXED added coverEncoded.length < 1 condition
 
 	const cover = JSON.parse(coverEncoded);
 
