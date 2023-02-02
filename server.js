@@ -34,6 +34,6 @@ app.use('/', indexRouter);
 app.use('/actors', actorRouter);
 app.use('/movies', movieRouter);
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 8000, () => {
 	console.log(`Server running on port: ${process.env.PORT}`);
 });
