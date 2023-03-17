@@ -28,10 +28,10 @@ const movieSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	actor: {
+	director: {
 		type: mongoose.Schema.Types.ObjectId,
 		required: true,
-		ref: 'Actor',
+		ref: 'Director',
 	},
 });
 

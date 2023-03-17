@@ -1,7 +1,7 @@
 :root {
 	--movie-cover-width: 200px;
-	--movie-cover-width-large: 325px;
-	--movie-cover-aspect-ratio: 0.75;
+	--movie-cover-width-large: 321px;
+	--movie-cover-aspect-ratio: 0.65;
 }
 
 .movie-cover {
@@ -47,12 +47,12 @@
 	justify-items: flex-start;
 	align-items: flex-start;
 	align-content: flex-start;
-	grid-template-areas: 'edit delete' 'actor actor';
+	grid-template-areas: 'edit delete' 'director director';
 	grid-gap: 0.5rem;
 	margin-top: 0.5rem;
 }
 
-.movie-details-actor-button {
-	grid-area: actor;
+.movie-details-director-button {
+	grid-area: director;
 	justify-self: stretch;
 }

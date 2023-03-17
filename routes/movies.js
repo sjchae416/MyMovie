@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Movie = require('../models/movie');
-const Actor = require('../models/actor');
+const Director = require('../models/director');
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif'];
 
 // ANCHOR cRud - all movies route
@@ -47,7 +47,7 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
 	const movie = new Movie({
 		title: req.body.title,
-		actor: req.body.actor,
+		director: req.body.director,
 		releaseDate: new Date(req.body.releaseDate),
 		rating: req.body.rating,
 		description: req.body.description,
@@ -67,7 +67,9 @@ router.post('/', async (req, res) => {
 // ANCHOR cRud - show movie route
 router.get('/:id', async (req, res) => {
 	try {
-		const movie = await Movie.findById(req.params.id).populate('actor').exec();
+		const movie = await Movie.findById(req.params.id)
+			.populate('director')
+			.exec();
 
 		res.render('movies/show', { movie: movie });
 	} catch {
@@ -93,7 +95,7 @@ router.put('/:id', async (req, res) => {
 	try {
 		movie = await Movie.findById(req.params.id);
 		movie.title = req.body.title;
-		movie.actor = req.body.actor;
+		movie.director = req.body.director;
 		movie.releaseDate = new Date(req.body.releaseDate);
 		movie.rating = req.body.rating;
 		movie.description = req.body.description;
@@ -146,9 +148,9 @@ async function renderEditPage(res, movie, hasError = false) {
 
 async function renderFormPage(res, movie, form, hasError = false) {
 	try {
-		const actors = await Actor.find({});
+		const directors = await Director.find({});
 		const params = {
-			actors: actors,
+			directors: directors,
 			movie: movie,
 		};
 

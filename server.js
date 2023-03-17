@@ -7,7 +7,7 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const indexRouter = require('./routes/index');
-const actorRouter = require('./routes/actors');
+const directorRouter = require('./routes/directors');
 const movieRouter = require('./routes/movies');
 const mongoose = require('mongoose');
 
@@ -31,7 +31,7 @@ db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to MongoDB'));
 
 app.use('/', indexRouter);
-app.use('/actors', actorRouter);
+app.use('/directors', directorRouter);
 app.use('/movies', movieRouter);
 
 app.listen(process.env.PORT || 3666, () => {

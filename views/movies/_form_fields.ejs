@@ -5,19 +5,19 @@
 	</div>
 
 	<div class="form-item">
-		<label>Actor</label>
-		<select name="actor">
-			<% actors.forEach(actor => { %>
-			<!-- FIXME (actor.id === movie.actor) always false -->
-			<% if (actor.id === movie.actor?.toString()) { %>
+		<label>Director</label>
+		<select name="director">
+			<% directors.forEach(director => { %>
+			<!-- FIXME (director.id === movie.director) always false -->
+			<% if (director.id === movie.director?.toString()) { %>
 			<option
 				selected
-				label="<%= actor.name %>"
-				value="<%= actor.id %>"
+				label="<%= director.name %>"
+				value="<%= director.id %>"
 			></option>
-			<!-- FIXED allow true by using optional chaining: movie.actor?.toString() -->
+			<!-- FIXED allow true by using optional chaining: movie.director?.toString() -->
 			<% } else { %>
-			<option label="<%= actor.name %>" value="<%= actor.id %>"></option>
+			<option label="<%= director.name %>" value="<%= director.id %>"></option>
 			<% } %> <% }); %>
 		</select>
 	</div>

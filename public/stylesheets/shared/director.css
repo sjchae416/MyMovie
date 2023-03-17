@@ -1,9 +1,9 @@
-.actor-row {
+.director-row {
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 1rem;
 }
 
-.actor-name {
+.director-name {
 	font-size: 1.5rem;
 }
